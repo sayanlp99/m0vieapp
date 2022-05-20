@@ -14,11 +14,12 @@ class MovieInfo {
     required this.errorMessage,
   });
 
-  List<Item> items;
+  List<MovieInfoItem> items;
   String errorMessage;
 
   factory MovieInfo.fromJson(Map<String, dynamic> json) => MovieInfo(
-        items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
+        items: List<MovieInfoItem>.from(
+            json["items"].map((x) => MovieInfoItem.fromJson(x))),
         errorMessage: json["errorMessage"],
       );
 
@@ -28,8 +29,8 @@ class MovieInfo {
       };
 }
 
-class Item {
-  Item({
+class MovieInfoItem {
+  MovieInfoItem({
     required this.id,
     required this.rank,
     required this.title,
@@ -51,7 +52,7 @@ class Item {
   String imDbRating;
   String imDbRatingCount;
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
+  factory MovieInfoItem.fromJson(Map<String, dynamic> json) => MovieInfoItem(
         id: json["id"],
         rank: json["rank"],
         title: json["title"],

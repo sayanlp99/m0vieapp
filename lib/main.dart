@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:m0vieapp/utils/check_user_logged_in.dart';
 
 Future<void> main() async {
@@ -13,8 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: CheckUserLoggedIn(),
+    return MaterialApp(
+      theme: ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(),
+      ),
+      home: const CheckUserLoggedIn(),
     );
   }
 }

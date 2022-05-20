@@ -11,11 +11,12 @@ class ComingSoon {
     required this.errorMessage,
   });
 
-  List<Item> items;
+  List<ComingSoonItem> items;
   String errorMessage;
 
   factory ComingSoon.fromJson(Map<String, dynamic> json) => ComingSoon(
-        items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
+        items: List<ComingSoonItem>.from(
+            json["items"].map((x) => ComingSoonItem.fromJson(x))),
         errorMessage: json["errorMessage"],
       );
 
@@ -25,8 +26,8 @@ class ComingSoon {
       };
 }
 
-class Item {
-  Item({
+class ComingSoonItem {
+  ComingSoonItem({
     required this.id,
     required this.title,
     required this.fullTitle,
@@ -68,7 +69,7 @@ class Item {
   String stars;
   List<RList> starList;
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
+  factory ComingSoonItem.fromJson(Map<String, dynamic> json) => ComingSoonItem(
         id: json["id"],
         title: json["title"],
         fullTitle: json["fullTitle"],
