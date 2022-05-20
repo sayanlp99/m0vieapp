@@ -12,9 +12,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          FirebaseAuth.instance.currentUser!.displayName.toString(),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: const [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Home Screen',
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

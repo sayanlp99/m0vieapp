@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:m0vieapp/screens/login_screen.dart';
-import 'package:m0vieapp/screens/home_screen.dart';
+import 'package:m0vieapp/screens/tab_activity.dart';
+import 'package:m0vieapp/screens/tabs/home_screen.dart';
 
 class CheckUserLoggedIn extends StatefulWidget {
   const CheckUserLoggedIn({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _CheckUserLoggedInState extends State<CheckUserLoggedIn> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => const TabActivity(),
           ),
           (Route<dynamic> route) => false);
     }

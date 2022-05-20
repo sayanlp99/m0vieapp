@@ -20,21 +20,45 @@ class _LoginScreenState extends State<LoginScreen> {
       idToken: googleAuth?.idToken,
     );
     await FirebaseAuth.instance.signInWithCredential(credential);
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const CheckUserLoggedIn(),
-        ),
-        (Route<dynamic> route) => false);
+    Future.delayed(
+        const Duration(
+          seconds: 7,
+        ), () {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const CheckUserLoggedIn(),
+          ),
+          (Route<dynamic> route) => false);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('Login'),
-          onPressed: login,
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.movie_creation_outlined,
+              size: MediaQuery.textScaleFactorOf(context) * 150,
+            ),
+            Text(
+              'm0vieapp',
+              style: TextStyle(
+                fontSize: MediaQuery.textScaleFactorOf(context) * 35,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              child: const Text('Sign in'),
+              onPressed: login,
+            ),
+          ],
         ),
       ),
     );
