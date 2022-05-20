@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "240468723672",
+    "project_id": "m0vieapp",
+    "storage_bucket": "m0vieapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240468723672:android:187248e45c5884704e94ad",
+        "android_client_info": {
+          "package_name": "com.sayan.m0vieapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240468723672-qj46sk2j5kuktcjf9bf17pp6rjl4rmij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP_ZoH26Zn2QQGcKSQNBC2DgiLjUkcdIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240468723672-qj46sk2j5kuktcjf9bf17pp6rjl4rmij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
