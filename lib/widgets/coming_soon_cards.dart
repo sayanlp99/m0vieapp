@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ComingSoonCards extends StatefulWidget {
   final String title;
@@ -42,7 +41,7 @@ class _ComingSoonCardsState extends State<ComingSoonCards> {
             ),
           ),
           child: Container(
-            padding: EdgeInsets.all(7),
+            padding: const EdgeInsets.all(7),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
