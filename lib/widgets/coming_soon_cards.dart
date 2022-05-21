@@ -29,7 +29,7 @@ class _ComingSoonCardsState extends State<ComingSoonCards> {
       child: Card(
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(8),
             color: const Color.fromARGB(100, 0, 0, 0),
             image: DecorationImage(
               image: NetworkImage(widget.img),

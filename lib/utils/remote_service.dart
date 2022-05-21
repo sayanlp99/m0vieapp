@@ -1,16 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:m0vieapp/models/coming_soon.dart';
-import 'package:m0vieapp/models/movie_info.dart';
+import 'package:m0vieapp/models/movie.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:m0vieapp/utils/api_url.dart';
 
 class RemoteService {
-  Future<List<MovieInfoItem>?> getTopMovies() async {
+  Future<Movie?> getMoviesInfo(id) async {
     var client = http.Client();
-    var response = await client.get(Uri.parse(ApiUrl.getTopMovies()));
+    var response = await client.get(Uri.parse(ApiUrl.getMovieInfo(id)));
+    // return movieFromJson(response.body);
     if (response.statusCode == 200) {
       var json = response.body;
-      return movieInfoFromJson(json).items;
+      debugPrint(json);
+      return movieFromJson(json);
     } else {
       return null;
     }

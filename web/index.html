@@ -25,12 +25,28 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="m0vieapp">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <meta name="google-signin-client_id" content="240468723672-qj46sk2j5kuktcjf9bf17pp6rjl4rmij.apps.googleusercontent.com">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
   <title>m0vieapp</title>
   <link rel="manifest" href="manifest.json">
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+  <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyBKI3c6O-oKo-EVkAzH7iyy6j19WeP14Nc",
+        authDomain: "h20remind.firebaseapp.com",
+        projectId: "h20remind",
+        storageBucket: "h20remind.appspot.com",
+        messagingSenderId: "1090514460095",
+        appId: "1:1090514460095:web:f67cb40788388cb9d0150a",
+        measurementId: "${config.measurementId}"
+      };
+      firebase.initializeApp(firebaseConfig);
+  </script>
 </head>
 <body>
   <!-- This script installs service_worker.js to provide PWA functionality to

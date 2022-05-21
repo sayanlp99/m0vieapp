@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:m0vieapp/models/coming_soon.dart';
+import 'package:m0vieapp/screens/coming_soon_movies.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:m0vieapp/widgets/coming_soon_cards.dart';
 
@@ -81,7 +82,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const Spacer(),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(this.context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const ComingSoonMovies(),
+                    ),
+                  );
+                },
                 icon: const Icon(Icons.chevron_right_sharp),
               ),
               const SizedBox(

@@ -5,6 +5,10 @@ class ApiUrl {
     return 'https://imdb-api.com/en/API/Top250Movies/$apiKey';
   }
 
+  static String getMovieInfo(id) {
+    return 'https://imdb-api.com/en/API/Title/$apiKey/$id';
+  }
+
   static String getCommingSoon() {
     return 'https://imdb-api.com/en/API/ComingSoon/$apiKey';
   }

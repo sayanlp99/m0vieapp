@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'm0vieapp',
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
