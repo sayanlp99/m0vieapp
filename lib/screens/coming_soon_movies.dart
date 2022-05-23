@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:m0vieapp/models/coming_soon.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
+import 'package:skeletons/skeletons.dart';
 
 class ComingSoonMovies extends StatefulWidget {
   const ComingSoonMovies({Key? key}) : super(key: key);
@@ -46,7 +47,9 @@ class _ComingSoonMoviesState extends State<ComingSoonMovies> {
         child: Container(
           margin: const EdgeInsets.all(16),
           child: comingSoonLoaded
-              ? const CircularProgressIndicator()
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
               : ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,

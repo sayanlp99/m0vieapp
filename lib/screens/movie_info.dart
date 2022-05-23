@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:m0vieapp/models/movie.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
+import 'package:skeletons/skeletons.dart';
 
 class MovieInfo extends StatefulWidget {
   final String id;
@@ -44,8 +45,72 @@ class _MovieInfoState extends State<MovieInfo> {
             ? const CircularProgressIndicator()
             : Text(
                 movie!.title,
-                style: const TextStyle(color: Colors.black),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  loading
+                      ? const SkeletonAvatar()
+                      : Expanded(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            height: MediaQuery.of(context).size.width * 0.3,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  movie!.image,
+                                ),
+                                fit: BoxFit.fitHeight,
+                              ),
+                            ),
+                          ),
+                        ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        loading
+                            ? const SkeletonLine()
+                            : Text('Directors: ${movie!.directors}'),
+                        const Divider(),
+                        loading
+                            ? const SkeletonLine()
+                            : Text('Writers: ${movie!.writers}'),
+                        const Divider(),
+                        loading
+                            ? const SkeletonLine()
+                            : Text('Stars: ${movie!.stars}'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const Divider(),
+              Text(
+                'Plot',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: MediaQuery.textScaleFactorOf(context) * 20,
+                ),
+              ),
+              loading ? const CircularProgressIndicator() : Text(movie!.plot),
+            ],
+          ),
+        ),
       ),
     );
   }
