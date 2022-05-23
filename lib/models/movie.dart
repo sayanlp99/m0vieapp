@@ -66,7 +66,7 @@ class Movie {
   String type;
   String year;
   String image;
-  DateTime releaseDate;
+  DateTime? releaseDate;
   String runtimeMins;
   String runtimeStr;
   String plot;
@@ -74,21 +74,21 @@ class Movie {
   bool plotLocalIsRtl;
   String awards;
   String directors;
-  List<CompanyListElement> directorList;
+  List<CompanyListElement>? directorList;
   String writers;
-  List<CompanyListElement> writerList;
+  List<CompanyListElement>? writerList;
   String stars;
-  List<CompanyListElement> starList;
-  List<ActorList> actorList;
+  List<CompanyListElement>? starList;
+  List<ActorList>? actorList;
   dynamic fullCast;
   String genres;
-  List<CountryListElement> genreList;
+  List<CountryListElement>? genreList;
   String companies;
-  List<CompanyListElement> companyList;
+  List<CompanyListElement>? companyList;
   String countries;
-  List<CountryListElement> countryList;
+  List<CountryListElement>? countryList;
   String languages;
-  List<CountryListElement> languageList;
+  List<CountryListElement>? languageList;
   String contentRating;
   String imDbRating;
   String imDbRatingVotes;
@@ -98,120 +98,170 @@ class Movie {
   dynamic posters;
   dynamic images;
   dynamic trailer;
-  BoxOffice boxOffice;
+  BoxOffice? boxOffice;
   String tagline;
   String keywords;
-  List<String> keywordList;
-  List<Similar> similars;
+  List<String>? keywordList;
+  List<Similar>? similars;
   dynamic tvSeriesInfo;
   dynamic tvEpisodeInfo;
   dynamic errorMessage;
 
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
-        id: json["id"],
-        title: json["title"],
-        originalTitle: json["originalTitle"],
-        fullTitle: json["fullTitle"],
-        type: json["type"],
-        year: json["year"],
-        image: json["image"],
-        releaseDate: DateTime.parse(json["releaseDate"]),
-        runtimeMins: json["runtimeMins"],
-        runtimeStr: json["runtimeStr"],
-        plot: json["plot"],
-        plotLocal: json["plotLocal"],
-        plotLocalIsRtl: json["plotLocalIsRtl"],
-        awards: json["awards"],
-        directors: json["directors"],
-        directorList: List<CompanyListElement>.from(
-            json["directorList"].map((x) => CompanyListElement.fromJson(x))),
-        writers: json["writers"],
-        writerList: List<CompanyListElement>.from(
-            json["writerList"].map((x) => CompanyListElement.fromJson(x))),
-        stars: json["stars"],
-        starList: List<CompanyListElement>.from(
-            json["starList"].map((x) => CompanyListElement.fromJson(x))),
-        actorList: List<ActorList>.from(
-            json["actorList"].map((x) => ActorList.fromJson(x))),
+        id: json["id"] == "" ? " " : json["id"],
+        title: json["title"] == "" ? " " : json["title"],
+        originalTitle:
+            json["originalTitle"] == "" ? " " : json["originalTitle"],
+        fullTitle: json["fullTitle"] == "" ? " " : json["fullTitle"],
+        type: json["type"] == "" ? " " : json["type"],
+        year: json["year"] == "" ? " " : json["year"],
+        image: json["image"] == "" ? " " : json["image"],
+        releaseDate: json["releaseDate"] == ""
+            ? DateTime.parse("")
+            : DateTime.parse(json["releaseDate"]),
+        runtimeMins: json["runtimeMins"] == "" ? " " : json["runtimeMins"],
+        runtimeStr: json["runtimeStr"] == "" ? " " : json["runtimeStr"],
+        plot: json["plot"] == "" ? " " : json["plot"],
+        plotLocal: json["plotLocal"] == "" ? " " : json["plotLocal"],
+        plotLocalIsRtl:
+            json["plotLocalIsRtl"] == "" ? " " : json["plotLocalIsRtl"],
+        awards: json["awards"] == "" ? " " : json["awards"],
+        directors: json["directors"] == "" ? " " : json["directors"],
+        directorList: json["directorList"] == ""
+            ? List<CompanyListElement>.from([]).toList()
+            : List<CompanyListElement>.from(json["directorList"]
+                .map((x) => CompanyListElement.fromJson(x))),
+        writers: json["writers"] == "" ? " " : json["writers"],
+        writerList: json["writerList"] == ""
+            ? List<CompanyListElement>.from([]).toList()
+            : List<CompanyListElement>.from(
+                json["writerList"].map((x) => CompanyListElement.fromJson(x))),
+        stars: json["stars"] == "" ? " " : json["stars"],
+        starList: json["starList"] == ""
+            ? List<CompanyListElement>.from([]).toList()
+            : List<CompanyListElement>.from(
+                json["starList"].map((x) => CompanyListElement.fromJson(x))),
+        actorList: json["actorList"] == ""
+            ? List<ActorList>.from([]).toList()
+            : List<ActorList>.from(
+                json["actorList"].map((x) => ActorList.fromJson(x))),
         fullCast: json["fullCast"],
-        genres: json["genres"],
-        genreList: List<CountryListElement>.from(
-            json["genreList"].map((x) => CountryListElement.fromJson(x))),
-        companies: json["companies"],
-        companyList: List<CompanyListElement>.from(
-            json["companyList"].map((x) => CompanyListElement.fromJson(x))),
-        countries: json["countries"],
-        countryList: List<CountryListElement>.from(
-            json["countryList"].map((x) => CountryListElement.fromJson(x))),
-        languages: json["languages"],
-        languageList: List<CountryListElement>.from(
-            json["languageList"].map((x) => CountryListElement.fromJson(x))),
-        contentRating: json["contentRating"],
-        imDbRating: json["imDbRating"],
-        imDbRatingVotes: json["imDbRatingVotes"],
-        metacriticRating: json["metacriticRating"],
+        genres: json["genres"] == "" ? " " : json["genres"],
+        genreList: json["genreList"] == ""
+            ? List<CountryListElement>.from([]).toList()
+            : List<CountryListElement>.from(
+                json["genreList"].map((x) => CountryListElement.fromJson(x))),
+        companies: json["companies"] == "" ? " " : json["companies"],
+        companyList: json["companyList"] == ""
+            ? List<CompanyListElement>.from([]).toList()
+            : List<CompanyListElement>.from(
+                json["companyList"].map((x) => CompanyListElement.fromJson(x))),
+        countries: json["countries"] == "" ? " " : json["countries"],
+        countryList: json["countryList"] == ""
+            ? List<CountryListElement>.from([]).toList()
+            : List<CountryListElement>.from(
+                json["countryList"].map((x) => CountryListElement.fromJson(x))),
+        languages: json["languages"] == "" ? " " : json["languages"],
+        languageList: json["languageList"] == ""
+            ? List<CountryListElement>.from([]).toList()
+            : List<CountryListElement>.from(json["languageList"]
+                .map((x) => CountryListElement.fromJson(x))),
+        contentRating:
+            json["contentRating"] == "" ? " " : json["contentRating"],
+        imDbRating: json["imDbRating"] == null ? "" : json["imDbRating"],
+        imDbRatingVotes:
+            json["imDbRatingVotes"] == null ? "" : json["imDbRatingVotes"],
+        metacriticRating:
+            json["metacriticRating"] == null ? " " : json["metacriticRating"],
         ratings: json["ratings"],
         wikipedia: json["wikipedia"],
         posters: json["posters"],
         images: json["images"],
         trailer: json["trailer"],
-        boxOffice: BoxOffice.fromJson(json["boxOffice"]),
-        tagline: json["tagline"],
-        keywords: json["keywords"],
-        keywordList: List<String>.from(json["keywordList"].map((x) => x)),
-        similars: List<Similar>.from(
-            json["similars"].map((x) => Similar.fromJson(x))),
+        boxOffice: json["boxOffice"] == ""
+            ? BoxOffice.fromJson({})
+            : BoxOffice.fromJson(json["boxOffice"]),
+        tagline: json["tagline"] == null ? "" : json["tagline"],
+        keywords: json["keywords"] == "" ? " " : json["keywords"],
+        keywordList: json["keywordList"] == ""
+            ? List<String>.from([]).toList()
+            : List<String>.from(json["keywordList"].map((x) => x)),
+        similars: json["similars"] == ""
+            ? List<Similar>.from([]).toList()
+            : List<Similar>.from(
+                json["similars"].map((x) => Similar.fromJson(x))),
         tvSeriesInfo: json["tvSeriesInfo"],
         tvEpisodeInfo: json["tvEpisodeInfo"],
         errorMessage: json["errorMessage"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "originalTitle": originalTitle,
-        "fullTitle": fullTitle,
-        "type": type,
-        "year": year,
-        "image": image,
-        "releaseDate":
-            "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
-        "runtimeMins": runtimeMins,
-        "runtimeStr": runtimeStr,
-        "plot": plot,
-        "plotLocal": plotLocal,
-        "plotLocalIsRtl": plotLocalIsRtl,
-        "awards": awards,
-        "directors": directors,
-        "directorList": List<dynamic>.from(directorList.map((x) => x.toJson())),
-        "writers": writers,
-        "writerList": List<dynamic>.from(writerList.map((x) => x.toJson())),
-        "stars": stars,
-        "starList": List<dynamic>.from(starList.map((x) => x.toJson())),
-        "actorList": List<dynamic>.from(actorList.map((x) => x.toJson())),
+        "id": id == "" ? " " : id,
+        "title": title == "" ? " " : title,
+        "originalTitle": originalTitle == "" ? " " : originalTitle,
+        "fullTitle": fullTitle == "" ? " " : fullTitle,
+        "type": type == "" ? " " : type,
+        "year": year == "" ? " " : year,
+        "image": image == "" ? " " : image,
+        "releaseDate": releaseDate == DateTime.parse("00-00-0000")
+            ? " "
+            : "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}",
+        "runtimeMins": runtimeMins == "" ? " " : runtimeMins,
+        "runtimeStr": runtimeStr == "" ? " " : runtimeStr,
+        "plot": plot == "" ? " " : plot,
+        "plotLocal": plotLocal == "" ? " " : plotLocal,
+        "plotLocalIsRtl": plotLocalIsRtl == "" ? " " : plotLocalIsRtl,
+        "awards": awards == "" ? " " : awards,
+        "directors": directors == "" ? " " : directors,
+        "directorList": directorList == ""
+            ? " "
+            : List<dynamic>.from(directorList!.map((x) => x.toJson())),
+        "writers": writers == "" ? " " : writers,
+        "writerList": writerList == ""
+            ? " "
+            : List<dynamic>.from(writerList!.map((x) => x.toJson())),
+        "stars": stars == "" ? " " : stars,
+        "starList": starList == ""
+            ? " "
+            : List<dynamic>.from(starList!.map((x) => x.toJson())),
+        "actorList": actorList == ""
+            ? " "
+            : List<dynamic>.from(actorList!.map((x) => x.toJson())),
         "fullCast": fullCast,
-        "genres": genres,
-        "genreList": List<dynamic>.from(genreList.map((x) => x.toJson())),
-        "companies": companies,
-        "companyList": List<dynamic>.from(companyList.map((x) => x.toJson())),
-        "countries": countries,
-        "countryList": List<dynamic>.from(countryList.map((x) => x.toJson())),
-        "languages": languages,
-        "languageList": List<dynamic>.from(languageList.map((x) => x.toJson())),
-        "contentRating": contentRating,
-        "imDbRating": imDbRating,
-        "imDbRatingVotes": imDbRatingVotes,
-        "metacriticRating": metacriticRating,
+        "genres": genres == "" ? " " : genres,
+        "genreList": genreList == ""
+            ? " "
+            : List<dynamic>.from(genreList!.map((x) => x.toJson())),
+        "companies": companies == "" ? " " : companies,
+        "companyList": companyList == ""
+            ? " "
+            : List<dynamic>.from(companyList!.map((x) => x.toJson())),
+        "countries": countries == "" ? " " : countries,
+        "countryList": countryList == ""
+            ? " "
+            : List<dynamic>.from(countryList!.map((x) => x.toJson())),
+        "languages": languages == "" ? " " : languages,
+        "languageList": languageList == ""
+            ? " "
+            : List<dynamic>.from(languageList!.map((x) => x.toJson())),
+        "contentRating": contentRating == "" ? " " : contentRating,
+        "imDbRating": imDbRating == "" ? " " : imDbRating,
+        "imDbRatingVotes": imDbRatingVotes == "" ? " " : imDbRatingVotes,
+        "metacriticRating": metacriticRating == "" ? " " : metacriticRating,
         "ratings": ratings,
         "wikipedia": wikipedia,
         "posters": posters,
         "images": images,
         "trailer": trailer,
-        "boxOffice": boxOffice.toJson(),
-        "tagline": tagline,
-        "keywords": keywords,
-        "keywordList": List<dynamic>.from(keywordList.map((x) => x)),
-        "similars": List<dynamic>.from(similars.map((x) => x.toJson())),
+        "boxOffice": boxOffice == "" ? " " : boxOffice!.toJson(),
+        "tagline": tagline == "" ? " " : tagline,
+        "keywords": keywords == "" ? " " : keywords,
+        "keywordList": keywordList == ""
+            ? " "
+            : List<dynamic>.from(keywordList!.map((x) => x)),
+        "similars": similars == ""
+            ? " "
+            : List<dynamic>.from(similars!.map((x) => x.toJson())),
         "tvSeriesInfo": tvSeriesInfo,
         "tvEpisodeInfo": tvEpisodeInfo,
         "errorMessage": errorMessage,
@@ -232,17 +282,17 @@ class ActorList {
   String asCharacter;
 
   factory ActorList.fromJson(Map<String, dynamic> json) => ActorList(
-        id: json["id"],
-        image: json["image"],
-        name: json["name"],
-        asCharacter: json["asCharacter"],
+        id: json["id"] == "" ? " " : json["id"],
+        image: json["image"] == "" ? " " : json["image"],
+        name: json["name"] == "" ? " " : json["name"],
+        asCharacter: json["asCharacter"] == "" ? " " : json["asCharacter"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "image": image,
-        "name": name,
-        "asCharacter": asCharacter,
+        "id": id == "" ? " " : id,
+        "image": image == "" ? " " : image,
+        "name": name == "" ? " " : name,
+        "asCharacter": asCharacter == "" ? " " : asCharacter,
       };
 }
 
@@ -260,17 +310,21 @@ class BoxOffice {
   String cumulativeWorldwideGross;
 
   factory BoxOffice.fromJson(Map<String, dynamic> json) => BoxOffice(
-        budget: json["budget"],
-        openingWeekendUsa: json["openingWeekendUSA"],
-        grossUsa: json["grossUSA"],
-        cumulativeWorldwideGross: json["cumulativeWorldwideGross"],
+        budget: json["budget"] == "" ? " " : json["budget"],
+        openingWeekendUsa:
+            json["openingWeekendUSA"] == "" ? " " : json["openingWeekendUSA"],
+        grossUsa: json["grossUSA"] == "" ? " " : json["grossUSA"],
+        cumulativeWorldwideGross: json["cumulativeWorldwideGross"] == ""
+            ? " "
+            : json["cumulativeWorldwideGross"],
       );
 
   Map<String, dynamic> toJson() => {
-        "budget": budget,
-        "openingWeekendUSA": openingWeekendUsa,
-        "grossUSA": grossUsa,
-        "cumulativeWorldwideGross": cumulativeWorldwideGross,
+        "budget": budget == "" ? " " : budget,
+        "openingWeekendUSA": openingWeekendUsa == "" ? " " : openingWeekendUsa,
+        "grossUSA": grossUsa == "" ? " " : grossUsa,
+        "cumulativeWorldwideGross":
+            cumulativeWorldwideGross == "" ? " " : cumulativeWorldwideGross,
       };
 }
 
@@ -285,13 +339,13 @@ class CompanyListElement {
 
   factory CompanyListElement.fromJson(Map<String, dynamic> json) =>
       CompanyListElement(
-        id: json["id"],
-        name: json["name"],
+        id: json["id"] == "" ? " " : json["id"],
+        name: json["name"] == "" ? " " : json["name"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
+        "id": id == "" ? " " : id,
+        "name": name == "" ? " " : name,
       };
 }
 
@@ -306,13 +360,13 @@ class CountryListElement {
 
   factory CountryListElement.fromJson(Map<String, dynamic> json) =>
       CountryListElement(
-        key: json["key"],
-        value: json["value"],
+        key: json["key"] == "" ? " " : json["key"],
+        value: json["value"] == "" ? " " : json["value"],
       );
 
   Map<String, dynamic> toJson() => {
-        "key": key,
-        "value": value,
+        "key": key == "" ? " " : key,
+        "value": value == "" ? " " : value,
       };
 }
 
@@ -330,16 +384,16 @@ class Similar {
   String imDbRating;
 
   factory Similar.fromJson(Map<String, dynamic> json) => Similar(
-        id: json["id"],
-        title: json["title"],
-        image: json["image"],
-        imDbRating: json["imDbRating"],
+        id: json["id"] == "" ? " " : json["id"],
+        title: json["title"] == "" ? " " : json["title"],
+        image: json["image"] == "" ? " " : json["image"],
+        imDbRating: json["imDbRating"] == "" ? " " : json["imDbRating"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "image": image,
-        "imDbRating": imDbRating,
+        "id": id == "" ? " " : id,
+        "title": title == "" ? " " : title,
+        "image": image == "" ? " " : image,
+        "imDbRating": imDbRating == "" ? " " : imDbRating,
       };
 }
