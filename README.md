@@ -14,6 +14,6 @@ A few resources used in this project:
 ## Features
 
  - User authentication
-
+ - Coming Soon Movie details
 
 
