@@ -9,10 +9,8 @@ class RemoteService {
   Future<Movie?> getMoviesInfo(id) async {
     var client = http.Client();
     var response = await client.get(Uri.parse(ApiUrl.getMovieInfo(id)));
-    // return movieFromJson(response.body);
     if (response.statusCode == 200) {
       var json = response.body;
-      debugPrint(json);
       return movieFromJson(json);
     } else {
       return null;

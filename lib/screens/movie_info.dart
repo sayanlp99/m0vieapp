@@ -37,7 +37,7 @@ class _MovieInfoState extends State<MovieInfo> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: const BackButton(
+        leading: const CloseButton(
           color: Colors.black,
         ),
         title: loading

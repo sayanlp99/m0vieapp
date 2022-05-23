@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
               IconButton(
                 onPressed: () {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    Navigator.of(context).pushReplacementNamed('/comingSoon');
+                    Navigator.of(context).pushNamed('/comingSoon');
                   });
                 },
                 icon: const Icon(Icons.chevron_right_sharp),
