@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:m0vieapp/models/coming_soon.dart';
-import 'package:m0vieapp/screens/movie_info.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 
 class ComingSoonMovies extends StatefulWidget {
@@ -72,13 +71,10 @@ class _ComingSoonMoviesState extends State<ComingSoonMovies> {
                         ),
                         trailing: const Icon(Icons.keyboard_arrow_right),
                         onTap: () {
-                          Navigator.of(this.context).push(
-                            MaterialPageRoute(
-                              builder: (context) => MovieInfo(
-                                id: comingSoonItem![index].id,
-                              ),
-                            ),
-                          );
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            Navigator.of(context).pushNamed('/movieInfo',
+                                arguments: comingSoonItem![index].id);
+                          });
                         },
                       ),
                     );

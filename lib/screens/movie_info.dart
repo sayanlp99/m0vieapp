@@ -41,7 +41,7 @@ class _MovieInfoState extends State<MovieInfo> {
           color: Colors.black,
         ),
         title: loading
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : Text(
                 movie!.title,
                 style: const TextStyle(color: Colors.black),
