@@ -13,7 +13,12 @@ A few resources used in this project:
 
 ## Features
 
- - User authentication
-
+ - [x] User authentication
+ - [x] Coming Soon Movie details
+ - [ ] Top Movies
+ - [ ] Top Tv Series
+ - [ ] Search Movies/TV Series
+ - [ ] Add to Favourites
+ - [ ] Movies recommendation
 
 
