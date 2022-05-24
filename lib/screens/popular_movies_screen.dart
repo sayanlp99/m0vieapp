@@ -3,24 +3,24 @@ import 'package:m0vieapp/models/popular.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:skeletons/skeletons.dart';
 
-class PopularMovies extends StatefulWidget {
-  const PopularMovies({Key? key}) : super(key: key);
+class PopularMoviesScreen extends StatefulWidget {
+  const PopularMoviesScreen({Key? key}) : super(key: key);
 
   @override
-  State<PopularMovies> createState() => _PopularMoviesState();
+  State<PopularMoviesScreen> createState() => _PopularMoviesScreenState();
 }
 
-class _PopularMoviesState extends State<PopularMovies> {
+class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
   bool popularMoviesLoaded = true;
   List<PopularItem>? popularItem;
 
   @override
   void initState() {
     super.initState();
-    getPopularMovies();
+    getPopularMoviesScreen();
   }
 
-  getPopularMovies() async {
+  getPopularMoviesScreen() async {
     popularItem = await RemoteService().getPopularMovies();
     if (popularItem != null) {
       setState(() {

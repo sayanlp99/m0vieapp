@@ -3,18 +3,18 @@ import 'package:m0vieapp/models/movie.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:skeletons/skeletons.dart';
 
-class MovieInfo extends StatefulWidget {
+class MovieInfoScreen extends StatefulWidget {
   final String id;
-  const MovieInfo({
+  const MovieInfoScreen({
     Key? key,
     required this.id,
   }) : super(key: key);
 
   @override
-  State<MovieInfo> createState() => _MovieInfoState();
+  State<MovieInfoScreen> createState() => _MovieInfoScreenState();
 }
 
-class _MovieInfoState extends State<MovieInfo> {
+class _MovieInfoScreenState extends State<MovieInfoScreen> {
   Movie? movie;
   bool loading = true;
 
@@ -66,7 +66,7 @@ class _MovieInfoState extends State<MovieInfo> {
                       : Text(
                           movie!.year + ' • ' + movie!.runtimeMins + ' mins ',
                         ),
-                  Spacer(),
+                  const Spacer(),
                   loading
                       ? const SkeletonLine()
                       : movie!.imDbRating.isEmpty
@@ -79,7 +79,7 @@ class _MovieInfoState extends State<MovieInfo> {
                             ),
                 ],
               ),
-              Divider(),
+              const Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

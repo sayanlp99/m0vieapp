@@ -3,14 +3,14 @@ import 'package:m0vieapp/models/coming_soon.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:skeletons/skeletons.dart';
 
-class ComingSoonMovies extends StatefulWidget {
-  const ComingSoonMovies({Key? key}) : super(key: key);
+class ComingSoonMoviesScreen extends StatefulWidget {
+  const ComingSoonMoviesScreen({Key? key}) : super(key: key);
 
   @override
-  State<ComingSoonMovies> createState() => _ComingSoonMoviesState();
+  State<ComingSoonMoviesScreen> createState() => _ComingSoonMoviesScreenState();
 }
 
-class _ComingSoonMoviesState extends State<ComingSoonMovies> {
+class _ComingSoonMoviesScreenState extends State<ComingSoonMoviesScreen> {
   List<ComingSoonItem>? comingSoonItem;
   bool comingSoonLoaded = true;
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:m0vieapp/screens/coming_soon_movies.dart';
+import 'package:m0vieapp/screens/coming_soon_movies_screen.dart';
 import 'package:m0vieapp/screens/login_screen.dart';
-import 'package:m0vieapp/screens/movie_info.dart';
+import 'package:m0vieapp/screens/movie_info_screen.dart';
 import 'package:m0vieapp/screens/tab_activity.dart';
-import 'package:m0vieapp/screens/popular_movies.dart';
+import 'package:m0vieapp/screens/popular_movies_screen.dart';
 import 'package:m0vieapp/utils/check_user_logged_in.dart';
 
 class RouteGenerator {
@@ -25,16 +25,16 @@ class RouteGenerator {
         );
       case '/comingSoon':
         return MaterialPageRoute(
-          builder: (_) => const ComingSoonMovies(),
+          builder: (_) => const ComingSoonMoviesScreen(),
         );
       case '/popularMovies':
         return MaterialPageRoute(
-          builder: (_) => const PopularMovies(),
+          builder: (_) => const PopularMoviesScreen(),
         );
       case '/movieInfo':
         if (args is String) {
           return MaterialPageRoute(
-            builder: (_) => MovieInfo(
+            builder: (_) => MovieInfoScreen(
               id: args,
             ),
           );

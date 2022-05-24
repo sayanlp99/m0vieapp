@@ -253,6 +253,107 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
+//
+//
+//
+//
+//
+
+            const Divider(),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  'Popular TV Shows',
+                  style: TextStyle(
+                    fontSize: MediaQuery.textScaleFactorOf(context) * 20,
+                  ),
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.of(context).pushNamed('/popularMovies');
+                    });
+                  },
+                  child: const Text('View all'),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+              ],
+            ),
+            popularMoviesLoaded
+                ? SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : SizedBox(
+                    height: 210,
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: popularItem!.length,
+                      itemBuilder: (context, index) {
+                        return PopularCards(
+                          title: popularItem![index].title,
+                          year: popularItem![index].year,
+                          img: popularItem![index].image,
+                          crew: popularItem![index].crew,
+                          rating: popularItem![index].imDbRating,
+                          id: popularItem![index].id,
+                        );
+                      },
+                    ),
+                  ),
           ],
         ),
       ),
