@@ -47,11 +47,16 @@ class _ComingSoonMoviesState extends State<ComingSoonMovies> {
         child: Container(
           margin: const EdgeInsets.all(16),
           child: comingSoonLoaded
-              ? const Center(
-                  child: CircularProgressIndicator(),
+              ? SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: Skeleton(
+                    isLoading: comingSoonLoaded,
+                    skeleton: SkeletonListView(),
+                    child: SkeletonListView(),
+                  ),
                 )
               : ListView.builder(
-                  scrollDirection: Axis.vertical,
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: comingSoonItem!.length,
                   itemBuilder: (context, index) {
