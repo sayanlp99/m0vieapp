@@ -42,7 +42,7 @@ class _MovieInfoState extends State<MovieInfo> {
           color: Colors.black,
         ),
         title: loading
-            ? const CircularProgressIndicator()
+            ? const SkeletonLine()
             : Text(
                 movie!.title,
                 style: const TextStyle(
@@ -63,7 +63,12 @@ class _MovieInfoState extends State<MovieInfo> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   loading
-                      ? const SkeletonAvatar()
+                      ? SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            height: MediaQuery.of(context).size.width * 0.3,
+                          ),
+                        )
                       : Expanded(
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.3,
@@ -100,14 +105,16 @@ class _MovieInfoState extends State<MovieInfo> {
                 ],
               ),
               const Divider(),
-              Text(
-                'Plot',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: MediaQuery.textScaleFactorOf(context) * 20,
-                ),
-              ),
-              loading ? const CircularProgressIndicator() : Text(movie!.plot),
+              loading
+                  ? const SkeletonLine()
+                  : Text(
+                      'Plot',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: MediaQuery.textScaleFactorOf(context) * 20,
+                      ),
+                    ),
+              loading ? SkeletonParagraph() : Text(movie!.plot),
             ],
           ),
         ),
