@@ -30,12 +30,12 @@ class _ComingSoonCardsState extends State<ComingSoonCards> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: const Color.fromARGB(100, 0, 0, 0),
+            color: const Color.fromARGB(226, 0, 0, 0),
             image: DecorationImage(
               image: NetworkImage(widget.img),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
-                const Color.fromARGB(100, 0, 0, 0).withOpacity(0.5),
+                const Color.fromARGB(167, 0, 0, 0).withOpacity(0.5),
                 BlendMode.dstATop,
               ),
             ),

@@ -12,4 +12,8 @@ class ApiUrl {
   static String getCommingSoon() {
     return 'https://imdb-api.com/en/API/ComingSoon/$apiKey';
   }
+
+  static String getPopularMovies() {
+    return 'https://imdb-api.com/en/API/MostPopularMovies/$apiKey';
+  }
 }
