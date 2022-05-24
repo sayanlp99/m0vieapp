@@ -60,6 +60,27 @@ class _MovieInfoState extends State<MovieInfo> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                children: [
+                  loading
+                      ? const SkeletonLine()
+                      : Text(
+                          movie!.year + ' • ' + movie!.runtimeMins + ' mins ',
+                        ),
+                  Spacer(),
+                  loading
+                      ? const SkeletonLine()
+                      : movie!.imDbRating.isEmpty
+                          ? Container()
+                          : Text(
+                              movie!.imDbRating +
+                                  '/10 • ' +
+                                  movie!.imDbRatingVotes +
+                                  ' votes',
+                            ),
+                ],
+              ),
+              Divider(),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   loading

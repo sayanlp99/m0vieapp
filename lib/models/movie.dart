@@ -167,7 +167,7 @@ class Movie {
             : List<CountryListElement>.from(json["languageList"]
                 .map((x) => CountryListElement.fromJson(x))),
         contentRating:
-            json["contentRating"] == "" ? " " : json["contentRating"],
+            json["contentRating"] == null ? "" : json["contentRating"],
         imDbRating: json["imDbRating"] == null ? "" : json["imDbRating"],
         imDbRatingVotes:
             json["imDbRatingVotes"] == null ? "" : json["imDbRatingVotes"],
