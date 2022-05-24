@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hi,',
+                      'Hi, ${FirebaseAuth.instance.currentUser?.displayName!.split(' ')[0]}',
                       style: TextStyle(
                         fontSize: MediaQuery.textScaleFactorOf(context) * 35,
                       ),
@@ -165,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 16,
                 ),
                 Text(
-                  'Top Movies',
+                  'Popular Movies',
                   style: TextStyle(
                     fontSize: MediaQuery.textScaleFactorOf(context) * 20,
                   ),
@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 TextButton(
                   onPressed: () {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Navigator.of(context).pushNamed('/topMovies');
+                      Navigator.of(context).pushNamed('/popularMovies');
                     });
                   },
                   child: const Text('View all'),
@@ -191,25 +191,46 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         SkeletonAvatar(
                           style: SkeletonAvatarStyle(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            height: 200,
-                            padding: const EdgeInsets.only(left: 16),
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
                           ),
                         ),
                         SkeletonAvatar(
                           style: SkeletonAvatarStyle(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            height: 200,
-                            padding: const EdgeInsets.only(left: 16),
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
                           ),
                         ),
                         SkeletonAvatar(
                           style: SkeletonAvatarStyle(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            height: 200,
-                            padding: const EdgeInsets.only(left: 16),
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
                           ),
-                        )
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
                       ],
                     ),
                   )

@@ -38,14 +38,16 @@ class _PopularCardsState extends State<PopularCards> {
               child: Container(
                 margin: const EdgeInsets.all(5),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       widget.title,
                       maxLines: 1,
                       overflow: TextOverflow.fade,
                       softWrap: false,
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: TextStyle(
+                        fontSize: MediaQuery.textScaleFactorOf(context) * 13,
                       ),
                     ),
                     Text(
@@ -53,28 +55,28 @@ class _PopularCardsState extends State<PopularCards> {
                       maxLines: 1,
                       overflow: TextOverflow.fade,
                       softWrap: false,
-                      style: const TextStyle(
-                        fontSize: 13,
+                      style: TextStyle(
+                        fontSize: MediaQuery.textScaleFactorOf(context) * 10,
                       ),
                     ),
                     Row(
                       children: [
                         Text(
                           widget.year,
-                          style: const TextStyle(
-                            fontSize: 11,
+                          style: TextStyle(
+                            fontSize: MediaQuery.textScaleFactorOf(context) * 9,
                           ),
                         ),
                         const Spacer(),
                         Icon(
                           Icons.star_half,
-                          size: 13,
+                          size: MediaQuery.textScaleFactorOf(context) * 10,
                           color: Colors.yellow.shade800,
                         ),
                         Text(
                           widget.rating,
-                          style: const TextStyle(
-                            fontSize: 12,
+                          style: TextStyle(
+                            fontSize: MediaQuery.textScaleFactorOf(context) * 9,
                           ),
                         ),
                       ],
