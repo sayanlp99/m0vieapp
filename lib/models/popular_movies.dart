@@ -4,22 +4,23 @@
 
 import 'dart:convert';
 
-Popular popularFromJson(String str) => Popular.fromJson(json.decode(str));
+PopularMovies popularFromJson(String str) =>
+    PopularMovies.fromJson(json.decode(str));
 
-String popularToJson(Popular data) => json.encode(data.toJson());
+String popularToJson(PopularMovies data) => json.encode(data.toJson());
 
-class Popular {
-  Popular({
+class PopularMovies {
+  PopularMovies({
     required this.items,
     required this.errorMessage,
   });
 
-  List<PopularItem> items;
+  List<PopularMoviesItem> items;
   String errorMessage;
 
-  factory Popular.fromJson(Map<String, dynamic> json) => Popular(
-        items: List<PopularItem>.from(
-            json["items"].map((x) => PopularItem.fromJson(x))),
+  factory PopularMovies.fromJson(Map<String, dynamic> json) => PopularMovies(
+        items: List<PopularMoviesItem>.from(
+            json["items"].map((x) => PopularMoviesItem.fromJson(x))),
         errorMessage: json["errorMessage"],
       );
 
@@ -29,8 +30,8 @@ class Popular {
       };
 }
 
-class PopularItem {
-  PopularItem({
+class PopularMoviesItem {
+  PopularMoviesItem({
     required this.id,
     required this.rank,
     required this.rankUpDown,
@@ -54,7 +55,8 @@ class PopularItem {
   String imDbRating;
   String imDbRatingCount;
 
-  factory PopularItem.fromJson(Map<String, dynamic> json) => PopularItem(
+  factory PopularMoviesItem.fromJson(Map<String, dynamic> json) =>
+      PopularMoviesItem(
         id: json["id"],
         rank: json["rank"],
         rankUpDown: json["rankUpDown"],

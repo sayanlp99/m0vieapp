@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:m0vieapp/models/popular.dart';
+import 'package:m0vieapp/models/popular_movies.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -12,7 +12,7 @@ class PopularMoviesScreen extends StatefulWidget {
 
 class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
   bool popularMoviesLoaded = true;
-  List<PopularItem>? popularItem;
+  List<PopularMoviesItem>? popularItem;
 
   @override
   void initState() {

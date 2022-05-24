@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:m0vieapp/models/coming_soon.dart';
-import 'package:m0vieapp/models/popular.dart';
+import 'package:m0vieapp/models/popular_movies.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:m0vieapp/widgets/coming_soon_cards.dart';
 import 'package:m0vieapp/widgets/popular_cards.dart';
@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<ComingSoonItem>? comingSoonItem;
-  List<PopularItem>? popularItem;
+  List<PopularMoviesItem>? popularItem;
   bool comingSoonLoaded = true;
   bool popularMoviesLoaded = true;
 

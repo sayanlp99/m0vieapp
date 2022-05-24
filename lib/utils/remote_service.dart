@@ -2,7 +2,7 @@ import 'package:m0vieapp/models/coming_soon.dart';
 import 'package:m0vieapp/models/movie.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:m0vieapp/models/popular.dart';
+import 'package:m0vieapp/models/popular_movies.dart';
 import 'package:m0vieapp/utils/api_url.dart';
 
 class RemoteService {
@@ -28,7 +28,7 @@ class RemoteService {
     }
   }
 
-  Future<List<PopularItem>?> getPopularMovies() async {
+  Future<List<PopularMoviesItem>?> getPopularMovies() async {
     var client = http.Client();
     var response = await client.get(Uri.parse(ApiUrl.getPopularMovies()));
     if (response.statusCode == 200) {
