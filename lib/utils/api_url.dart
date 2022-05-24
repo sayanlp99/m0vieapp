@@ -16,4 +16,8 @@ class ApiUrl {
   static String getPopularMovies() {
     return 'https://imdb-api.com/en/API/MostPopularMovies/$apiKey';
   }
+
+  static String getPopularTv() {
+    return 'https://imdb-api.com/en/API/MostPopularTVs/$apiKey';
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:m0vieapp/screens/coming_soon_movies_screen.dart';
 import 'package:m0vieapp/screens/login_screen.dart';
 import 'package:m0vieapp/screens/movie_info_screen.dart';
+import 'package:m0vieapp/screens/popular_tvs_screen.dart';
 import 'package:m0vieapp/screens/tab_activity.dart';
 import 'package:m0vieapp/screens/popular_movies_screen.dart';
 import 'package:m0vieapp/utils/check_user_logged_in.dart';
@@ -30,6 +31,10 @@ class RouteGenerator {
       case '/popularMovies':
         return MaterialPageRoute(
           builder: (_) => const PopularMoviesScreen(),
+        );
+      case '/popularTvs':
+        return MaterialPageRoute(
+          builder: (_) => const PopularTvsScreen(),
         );
       case '/movieInfo':
         if (args is String) {

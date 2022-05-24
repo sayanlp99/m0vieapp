@@ -119,8 +119,8 @@ class Movie {
         releaseDate: json["releaseDate"] == ""
             ? DateTime.parse("")
             : DateTime.parse(json["releaseDate"]),
-        runtimeMins: json["runtimeMins"] == "" ? " " : json["runtimeMins"],
-        runtimeStr: json["runtimeStr"] == "" ? " " : json["runtimeStr"],
+        runtimeMins: json["runtimeMins"] == null ? "" : json["runtimeMins"],
+        runtimeStr: json["runtimeStr"] == null ? " " : json["runtimeStr"],
         plot: json["plot"] == "" ? " " : json["plot"],
         plotLocal: json["plotLocal"] == "" ? " " : json["plotLocal"],
         plotLocalIsRtl:

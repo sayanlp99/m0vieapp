@@ -3,6 +3,7 @@ import 'package:m0vieapp/models/movie.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:m0vieapp/models/popular_movies.dart';
+import 'package:m0vieapp/models/popular_tv.dart';
 import 'package:m0vieapp/utils/api_url.dart';
 
 class RemoteService {
@@ -33,7 +34,18 @@ class RemoteService {
     var response = await client.get(Uri.parse(ApiUrl.getPopularMovies()));
     if (response.statusCode == 200) {
       var json = response.body;
-      return popularFromJson(json).items;
+      return popularMoviesFromJson(json).items;
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<PopularTvItem>?> getPopularTvs() async {
+    var client = http.Client();
+    var response = await client.get(Uri.parse(ApiUrl.getPopularTv()));
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return popularTvFromJson(json).items;
     } else {
       return null;
     }

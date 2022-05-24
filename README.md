@@ -16,7 +16,7 @@ A few resources used in this project:
  - [x] User authentication
  - [x] Coming Soon Movie details
  - [x] Popular Movies
- - [ ] Popular Tv Series
+ - [x] Popular Tv Series
  - [ ] Top Movies
  - [ ] Top Tv Series
  - [ ] Search Movies/TV Series

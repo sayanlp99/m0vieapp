@@ -1,26 +1,25 @@
 // To parse this JSON data, do
 //
-//     final popular = popularFromJson(jsonString);
+//     final popularTv = popularTvFromJson(jsonString);
 
 import 'dart:convert';
 
-PopularMovies popularMoviesFromJson(String str) =>
-    PopularMovies.fromJson(json.decode(str));
+PopularTv popularTvFromJson(String str) => PopularTv.fromJson(json.decode(str));
 
-String popularMoviesToJson(PopularMovies data) => json.encode(data.toJson());
+String popularTvToJson(PopularTv data) => json.encode(data.toJson());
 
-class PopularMovies {
-  PopularMovies({
+class PopularTv {
+  PopularTv({
     required this.items,
     required this.errorMessage,
   });
 
-  List<PopularMoviesItem> items;
+  List<PopularTvItem> items;
   String errorMessage;
 
-  factory PopularMovies.fromJson(Map<String, dynamic> json) => PopularMovies(
-        items: List<PopularMoviesItem>.from(
-            json["items"].map((x) => PopularMoviesItem.fromJson(x))),
+  factory PopularTv.fromJson(Map<String, dynamic> json) => PopularTv(
+        items: List<PopularTvItem>.from(
+            json["items"].map((x) => PopularTvItem.fromJson(x))),
         errorMessage: json["errorMessage"],
       );
 
@@ -30,8 +29,8 @@ class PopularMovies {
       };
 }
 
-class PopularMoviesItem {
-  PopularMoviesItem({
+class PopularTvItem {
+  PopularTvItem({
     required this.id,
     required this.rank,
     required this.rankUpDown,
@@ -55,8 +54,7 @@ class PopularMoviesItem {
   String imDbRating;
   String imDbRatingCount;
 
-  factory PopularMoviesItem.fromJson(Map<String, dynamic> json) =>
-      PopularMoviesItem(
+  factory PopularTvItem.fromJson(Map<String, dynamic> json) => PopularTvItem(
         id: json["id"],
         rank: json["rank"],
         rankUpDown: json["rankUpDown"],

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:m0vieapp/models/coming_soon.dart';
 import 'package:m0vieapp/models/popular_movies.dart';
+import 'package:m0vieapp/models/popular_tv.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:m0vieapp/widgets/coming_soon_cards.dart';
 import 'package:m0vieapp/widgets/popular_cards.dart';
@@ -16,20 +17,32 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<ComingSoonItem>? comingSoonItem;
-  List<PopularMoviesItem>? popularItem;
+  List<PopularMoviesItem>? popularMoviesItem;
+  List<PopularTvItem>? popularTvItem;
   bool comingSoonLoaded = true;
   bool popularMoviesLoaded = true;
+  bool popularTvsLoaded = true;
 
   @override
   void initState() {
     super.initState();
     getComingSoonItems();
     getPopularMovies();
+    getPopularTvs();
+  }
+
+  getPopularTvs() async {
+    popularTvItem = await RemoteService().getPopularTvs();
+    if (popularTvItem != null) {
+      setState(() {
+        popularTvsLoaded = false;
+      });
+    }
   }
 
   getPopularMovies() async {
-    popularItem = await RemoteService().getPopularMovies();
-    if (popularItem != null) {
+    popularMoviesItem = await RemoteService().getPopularMovies();
+    if (popularMoviesItem != null) {
       setState(() {
         popularMoviesLoaded = false;
       });
@@ -240,15 +253,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
-                      itemCount: popularItem!.length,
+                      itemCount: popularMoviesItem!.length,
                       itemBuilder: (context, index) {
                         return PopularCards(
-                          title: popularItem![index].title,
-                          year: popularItem![index].year,
-                          img: popularItem![index].image,
-                          crew: popularItem![index].crew,
-                          rating: popularItem![index].imDbRating,
-                          id: popularItem![index].id,
+                          title: popularMoviesItem![index].title,
+                          year: popularMoviesItem![index].year,
+                          img: popularMoviesItem![index].image,
+                          crew: popularMoviesItem![index].crew,
+                          rating: popularMoviesItem![index].imDbRating,
+                          id: popularMoviesItem![index].id,
                         );
                       },
                     ),
@@ -275,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 TextButton(
                   onPressed: () {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Navigator.of(context).pushNamed('/popularMovies');
+                      Navigator.of(context).pushNamed('/popularTvs');
                     });
                   },
                   child: const Text('View all'),
@@ -285,7 +298,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            popularMoviesLoaded
+            popularTvsLoaded
                 ? SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -341,19 +354,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
-                      itemCount: popularItem!.length,
+                      itemCount: popularTvItem!.length,
                       itemBuilder: (context, index) {
                         return PopularCards(
-                          title: popularItem![index].title,
-                          year: popularItem![index].year,
-                          img: popularItem![index].image,
-                          crew: popularItem![index].crew,
-                          rating: popularItem![index].imDbRating,
-                          id: popularItem![index].id,
+                          title: popularTvItem![index].title,
+                          year: popularTvItem![index].year,
+                          img: popularTvItem![index].image,
+                          crew: popularTvItem![index].crew,
+                          rating: popularTvItem![index].imDbRating,
+                          id: popularTvItem![index].id,
                         );
                       },
                     ),
                   ),
+            const Divider(),
           ],
         ),
       ),
