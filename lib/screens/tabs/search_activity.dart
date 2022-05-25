@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:m0vieapp/models/search.dart';
 import 'package:m0vieapp/utils/constants.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
-import 'package:skeletons/skeletons.dart';
 
 class SearchActivity extends StatefulWidget {
   const SearchActivity({Key? key}) : super(key: key);

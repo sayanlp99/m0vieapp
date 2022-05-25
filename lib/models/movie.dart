@@ -2,6 +2,8 @@
 //
 //     final movie = movieFromJson(jsonString);
 
+// ignore_for_file: prefer_if_null_operators, unrelated_type_equality_checks
+
 import 'dart:convert';
 
 Movie movieFromJson(String str) => Movie.fromJson(json.decode(str));
