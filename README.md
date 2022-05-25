@@ -17,8 +17,8 @@ A few resources used in this project:
  - [x] Coming Soon Movie details
  - [x] Popular Movies
  - [x] Popular Tv Series
- - [ ] Top Movies
- - [ ] Top Tv Series
+ - [x] Top Movies
+ - [x] Top Tv Series
  - [ ] Search Movies/TV Series
  - [ ] Add to Favourites
  - [ ] Movies recommendation
