@@ -1,3 +1,5 @@
+[![Dart](https://github.com/sayanlp99/m0vieapp/actions/workflows/dart.yml/badge.svg?branch=main&event=push)](https://github.com/sayanlp99/m0vieapp/actions/workflows/dart.yml)
+
 # m0vieapp
 
 A Flutter movie app using imbd api, firebase authentication.
