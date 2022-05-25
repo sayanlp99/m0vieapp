@@ -3,28 +3,28 @@ import 'package:m0vieapp/models/popular_top.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:skeletons/skeletons.dart';
 
-class PopularMoviesScreen extends StatefulWidget {
-  const PopularMoviesScreen({Key? key}) : super(key: key);
+class TopTvsScreen extends StatefulWidget {
+  const TopTvsScreen({Key? key}) : super(key: key);
 
   @override
-  State<PopularMoviesScreen> createState() => _PopularMoviesScreenState();
+  State<TopTvsScreen> createState() => _TopTvsScreenState();
 }
 
-class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
-  bool popularMoviesLoaded = true;
-  List<PopularTopItem>? popularItem;
+class _TopTvsScreenState extends State<TopTvsScreen> {
+  bool topTvsLoaded = true;
+  List<PopularTopItem>? topTvItem;
 
   @override
   void initState() {
     super.initState();
-    getPopularMoviesScreen();
+    getTopMoviesScreen();
   }
 
-  getPopularMoviesScreen() async {
-    popularItem = await RemoteService().getPopularMovies();
-    if (popularItem != null) {
+  getTopMoviesScreen() async {
+    topTvItem = await RemoteService().getTopTvs();
+    if (topTvItem != null) {
       setState(() {
-        popularMoviesLoaded = false;
+        topTvsLoaded = false;
       });
     }
   }
@@ -38,7 +38,7 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
           color: Colors.black,
         ),
         title: const Text(
-          'Popular Movies',
+          'Top Tv Shows',
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -46,11 +46,11 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
         scrollDirection: Axis.vertical,
         child: Container(
           margin: const EdgeInsets.all(16),
-          child: popularMoviesLoaded
+          child: topTvsLoaded
               ? SizedBox(
                   height: MediaQuery.of(context).size.height,
                   child: Skeleton(
-                    isLoading: popularMoviesLoaded,
+                    isLoading: topTvsLoaded,
                     skeleton: SkeletonListView(),
                     child: SkeletonListView(),
                   ),
@@ -58,18 +58,18 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
               : ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: popularItem!.length,
+                  itemCount: topTvItem!.length,
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
                         title: Text(
-                          popularItem![index].title,
+                          topTvItem![index].title,
                         ),
                         leading: Image.network(
-                          popularItem![index].image,
+                          topTvItem![index].image,
                         ),
                         dense: false,
-                        subtitle: Text(popularItem![index].year),
+                        subtitle: Text(topTvItem![index].year),
                         trailing: FittedBox(
                           fit: BoxFit.fill,
                           child: Row(
@@ -79,7 +79,7 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
                                 color: Colors.yellow.shade800,
                               ),
                               Text(
-                                popularItem![index].imDbRating,
+                                topTvItem![index].imDbRating,
                               ),
                             ],
                           ),
@@ -87,7 +87,7 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
                         onTap: () {
                           WidgetsBinding.instance.addPostFrameCallback((_) {
                             Navigator.of(context).pushNamed('/movieInfo',
-                                arguments: popularItem![index].id);
+                                arguments: topTvItem![index].id);
                           });
                         },
                       ),

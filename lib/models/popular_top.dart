@@ -1,26 +1,26 @@
 // To parse this JSON data, do
 //
-//     final popular = popularFromJson(jsonString);
+//     final popularTop = popularTopFromJson(jsonString);
 
 import 'dart:convert';
 
-PopularMovies popularMoviesFromJson(String str) =>
-    PopularMovies.fromJson(json.decode(str));
+PopularTop popularTopFromJson(String str) =>
+    PopularTop.fromJson(json.decode(str));
 
-String popularMoviesToJson(PopularMovies data) => json.encode(data.toJson());
+String popularTopToJson(PopularTop data) => json.encode(data.toJson());
 
-class PopularMovies {
-  PopularMovies({
+class PopularTop {
+  PopularTop({
     required this.items,
     required this.errorMessage,
   });
 
-  List<PopularMoviesItem> items;
+  List<PopularTopItem> items;
   String errorMessage;
 
-  factory PopularMovies.fromJson(Map<String, dynamic> json) => PopularMovies(
-        items: List<PopularMoviesItem>.from(
-            json["items"].map((x) => PopularMoviesItem.fromJson(x))),
+  factory PopularTop.fromJson(Map<String, dynamic> json) => PopularTop(
+        items: List<PopularTopItem>.from(
+            json["items"].map((x) => PopularTopItem.fromJson(x))),
         errorMessage: json["errorMessage"],
       );
 
@@ -30,11 +30,10 @@ class PopularMovies {
       };
 }
 
-class PopularMoviesItem {
-  PopularMoviesItem({
+class PopularTopItem {
+  PopularTopItem({
     required this.id,
     required this.rank,
-    required this.rankUpDown,
     required this.title,
     required this.fullTitle,
     required this.year,
@@ -46,7 +45,6 @@ class PopularMoviesItem {
 
   String id;
   String rank;
-  String rankUpDown;
   String title;
   String fullTitle;
   String year;
@@ -55,11 +53,9 @@ class PopularMoviesItem {
   String imDbRating;
   String imDbRatingCount;
 
-  factory PopularMoviesItem.fromJson(Map<String, dynamic> json) =>
-      PopularMoviesItem(
+  factory PopularTopItem.fromJson(Map<String, dynamic> json) => PopularTopItem(
         id: json["id"],
         rank: json["rank"],
-        rankUpDown: json["rankUpDown"],
         title: json["title"],
         fullTitle: json["fullTitle"],
         year: json["year"],
@@ -72,7 +68,6 @@ class PopularMoviesItem {
   Map<String, dynamic> toJson() => {
         "id": id,
         "rank": rank,
-        "rankUpDown": rankUpDown,
         "title": title,
         "fullTitle": fullTitle,
         "year": year,

@@ -2,8 +2,7 @@ import 'package:m0vieapp/models/coming_soon.dart';
 import 'package:m0vieapp/models/movie.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:m0vieapp/models/popular_movies.dart';
-import 'package:m0vieapp/models/popular_tv.dart';
+import 'package:m0vieapp/models/popular_top.dart';
 import 'package:m0vieapp/utils/api_url.dart';
 
 class RemoteService {
@@ -29,23 +28,45 @@ class RemoteService {
     }
   }
 
-  Future<List<PopularMoviesItem>?> getPopularMovies() async {
+  Future<List<PopularTopItem>?> getPopularMovies() async {
     var client = http.Client();
     var response = await client.get(Uri.parse(ApiUrl.getPopularMovies()));
     if (response.statusCode == 200) {
       var json = response.body;
-      return popularMoviesFromJson(json).items;
+      return popularTopFromJson(json).items;
     } else {
       return null;
     }
   }
 
-  Future<List<PopularTvItem>?> getPopularTvs() async {
+  Future<List<PopularTopItem>?> getPopularTvs() async {
     var client = http.Client();
     var response = await client.get(Uri.parse(ApiUrl.getPopularTv()));
     if (response.statusCode == 200) {
       var json = response.body;
-      return popularTvFromJson(json).items;
+      return popularTopFromJson(json).items;
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<PopularTopItem>?> getTopMovies() async {
+    var client = http.Client();
+    var response = await client.get(Uri.parse(ApiUrl.getTopMovies()));
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return popularTopFromJson(json).items;
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<PopularTopItem>?> getTopTvs() async {
+    var client = http.Client();
+    var response = await client.get(Uri.parse(ApiUrl.getTopTvs()));
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return popularTopFromJson(json).items;
     } else {
       return null;
     }

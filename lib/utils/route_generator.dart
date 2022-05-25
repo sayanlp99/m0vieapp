@@ -5,6 +5,8 @@ import 'package:m0vieapp/screens/movie_info_screen.dart';
 import 'package:m0vieapp/screens/popular_tvs_screen.dart';
 import 'package:m0vieapp/screens/tab_activity.dart';
 import 'package:m0vieapp/screens/popular_movies_screen.dart';
+import 'package:m0vieapp/screens/top_movies_screen.dart';
+import 'package:m0vieapp/screens/top_tv_screens.dart';
 import 'package:m0vieapp/utils/check_user_logged_in.dart';
 
 class RouteGenerator {
@@ -35,6 +37,14 @@ class RouteGenerator {
       case '/popularTvs':
         return MaterialPageRoute(
           builder: (_) => const PopularTvsScreen(),
+        );
+      case '/topMovies':
+        return MaterialPageRoute(
+          builder: (_) => const TopMoviesScreen(),
+        );
+      case '/topTvs':
+        return MaterialPageRoute(
+          builder: (_) => const TopTvsScreen(),
         );
       case '/movieInfo':
         if (args is String) {

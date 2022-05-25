@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:m0vieapp/models/popular_tv.dart';
+import 'package:m0vieapp/models/popular_top.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -12,7 +12,7 @@ class PopularTvsScreen extends StatefulWidget {
 
 class _PopularTvsScreenState extends State<PopularTvsScreen> {
   bool popularTvsLoaded = true;
-  List<PopularTvItem>? popularTvItem;
+  List<PopularTopItem>? popularTvItem;
 
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _PopularTvsScreenState extends State<PopularTvsScreen> {
           color: Colors.black,
         ),
         title: const Text(
-          'Popular Movies',
+          'Popular Tv Shows',
           style: TextStyle(color: Colors.black),
         ),
       ),

@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:m0vieapp/models/coming_soon.dart';
-import 'package:m0vieapp/models/popular_movies.dart';
-import 'package:m0vieapp/models/popular_tv.dart';
+import 'package:m0vieapp/models/popular_top.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:m0vieapp/widgets/coming_soon_cards.dart';
 import 'package:m0vieapp/widgets/popular_cards.dart';
@@ -17,11 +16,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<ComingSoonItem>? comingSoonItem;
-  List<PopularMoviesItem>? popularMoviesItem;
-  List<PopularTvItem>? popularTvItem;
+  List<PopularTopItem>? popularMoviesItem;
+  List<PopularTopItem>? popularTvItem;
+  List<PopularTopItem>? topMoviesItem;
+  List<PopularTopItem>? topTvItem;
   bool comingSoonLoaded = true;
   bool popularMoviesLoaded = true;
   bool popularTvsLoaded = true;
+  bool topMoviesLoaded = true;
+  bool topTvsLoaded = true;
 
   @override
   void initState() {
@@ -29,6 +32,26 @@ class _HomeScreenState extends State<HomeScreen> {
     getComingSoonItems();
     getPopularMovies();
     getPopularTvs();
+    getTopMovies();
+    getTopTvs();
+  }
+
+  getTopTvs() async {
+    topTvItem = await RemoteService().getTopTvs();
+    if (topTvItem != null) {
+      setState(() {
+        topTvsLoaded = false;
+      });
+    }
+  }
+
+  getTopMovies() async {
+    topMoviesItem = await RemoteService().getTopMovies();
+    if (topMoviesItem != null) {
+      setState(() {
+        topMoviesLoaded = false;
+      });
+    }
   }
 
   getPopularTvs() async {
@@ -266,12 +289,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
-//
-//
-//
-//
-//
-
             const Divider(),
             Row(
               children: [
@@ -363,6 +380,196 @@ class _HomeScreenState extends State<HomeScreen> {
                           crew: popularTvItem![index].crew,
                           rating: popularTvItem![index].imDbRating,
                           id: popularTvItem![index].id,
+                        );
+                      },
+                    ),
+                  ),
+            const Divider(),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  'Top Movies',
+                  style: TextStyle(
+                    fontSize: MediaQuery.textScaleFactorOf(context) * 20,
+                  ),
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.of(context).pushNamed('/topMovies');
+                    });
+                  },
+                  child: const Text('View all'),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+              ],
+            ),
+            topMoviesLoaded
+                ? SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : SizedBox(
+                    height: 210,
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: topMoviesItem!.length,
+                      itemBuilder: (context, index) {
+                        return PopularCards(
+                          title: topMoviesItem![index].title,
+                          year: topMoviesItem![index].year,
+                          img: topMoviesItem![index].image,
+                          crew: topMoviesItem![index].crew,
+                          rating: topMoviesItem![index].imDbRating,
+                          id: topMoviesItem![index].id,
+                        );
+                      },
+                    ),
+                  ),
+            const Divider(),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  'Top TV Shows',
+                  style: TextStyle(
+                    fontSize: MediaQuery.textScaleFactorOf(context) * 20,
+                  ),
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.of(context).pushNamed('/topTvs');
+                    });
+                  },
+                  child: const Text('View all'),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+              ],
+            ),
+            topTvsLoaded
+                ? SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                        SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: 210,
+                            padding: const EdgeInsets.only(left: 7),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : SizedBox(
+                    height: 210,
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: topTvItem!.length,
+                      itemBuilder: (context, index) {
+                        return PopularCards(
+                          title: topTvItem![index].title,
+                          year: topTvItem![index].year,
+                          img: topTvItem![index].image,
+                          crew: topTvItem![index].crew,
+                          rating: topTvItem![index].imDbRating,
+                          id: topTvItem![index].id,
                         );
                       },
                     ),
