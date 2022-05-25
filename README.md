@@ -19,7 +19,7 @@ A few resources used in this project:
  - [x] Popular Tv Series
  - [x] Top Movies
  - [x] Top Tv Series
- - [ ] Search Movies/TV Series
+ - [x] Search Movies/TV Series
  - [ ] Add to Favourites
  - [ ] Movies recommendation
  - [ ] Responsive UI

@@ -3,6 +3,7 @@ import 'package:m0vieapp/models/movie.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:m0vieapp/models/popular_top.dart';
+import 'package:m0vieapp/models/search.dart';
 import 'package:m0vieapp/utils/api_url.dart';
 
 class RemoteService {
@@ -67,6 +68,17 @@ class RemoteService {
     if (response.statusCode == 200) {
       var json = response.body;
       return popularTopFromJson(json).items;
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<SearchResult>?> search(expression) async {
+    var client = http.Client();
+    var response = await client.get(Uri.parse(ApiUrl.search(expression)));
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return searchFromJson(json).results;
     } else {
       return null;
     }

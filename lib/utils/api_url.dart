@@ -1,6 +1,10 @@
 import 'package:m0vieapp/utils/constants.dart';
 
 class ApiUrl {
+  static String search(expression) {
+    return 'https://imdb-api.com/en/API/Search/$apiKey/$expression';
+  }
+
   static String getTopMovies() {
     return 'https://imdb-api.com/en/API/Top250Movies/$apiKey';
   }
