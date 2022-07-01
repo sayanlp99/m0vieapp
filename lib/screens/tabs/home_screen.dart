@@ -1,11 +1,21 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:m0vieapp/models/coming_soon.dart';
 import 'package:m0vieapp/models/popular_top.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:m0vieapp/widgets/coming_soon_cards.dart';
 import 'package:m0vieapp/widgets/popular_cards.dart';
 import 'package:skeletons/skeletons.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+final profilePicRef = FirebaseFirestore.instance.collection('movie');
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -25,15 +35,37 @@ class _HomeScreenState extends State<HomeScreen> {
   bool popularTvsLoaded = true;
   bool topMoviesLoaded = true;
   bool topTvsLoaded = true;
+  File? _pickedImage;
+  Uint8List webImage = Uint8List(8);
+  UploadTask? task;
+  bool loadFirebaseStoragePic = false;
+  String? firebaseProfilePic;
 
   @override
   void initState() {
     super.initState();
+    getCustomProfilePic();
     getComingSoonItems();
     getPopularMovies();
     getPopularTvs();
     getTopMovies();
     getTopTvs();
+  }
+
+  getCustomProfilePic() async {
+    var storageFile = FirebaseStorage.instance
+        .ref('profile_pic/${FirebaseAuth.instance.currentUser?.uid}.jpg');
+    storageFile.getDownloadURL().then((value) {
+      debugPrint(value.toString());
+      if (value.isNotEmpty) {
+        setState(() {
+          loadFirebaseStoragePic = true;
+          firebaseProfilePic = value.toString();
+        });
+      } else {
+        loadFirebaseStoragePic = false;
+      }
+    });
   }
 
   getTopTvs() async {
@@ -81,6 +113,99 @@ class _HomeScreenState extends State<HomeScreen> {
     } else {}
   }
 
+  Future<String> uploadFile() async {
+    if (!kIsWeb) {
+      if (_pickedImage == null) return "Empty";
+      final destination =
+          'profile_pic/${FirebaseAuth.instance.currentUser?.uid}.jpg';
+      task = uploadImg(destination, _pickedImage!);
+      if (task == null) return "Empty";
+      final snapshot = await task!.whenComplete(() {});
+      final urlDownload = await snapshot.ref.getDownloadURL();
+      debugPrint('Download-Link: $urlDownload');
+      EasyLoading.dismiss();
+      Navigator.pop(context);
+      return urlDownload;
+    } else {
+      if (webImage == null) return "Empty";
+      final destination =
+          'profile_pic/${FirebaseAuth.instance.currentUser?.uid}.jpg';
+      task = uploadWebImg(destination, webImage);
+      if (task == null) return "Empty";
+      final snapshot = await task!.whenComplete(() {});
+      final urlDownload = await snapshot.ref.getDownloadURL();
+      debugPrint('Download-Link: $urlDownload');
+      EasyLoading.dismiss();
+      Navigator.pop(context);
+      return urlDownload;
+    }
+  }
+
+  uploadWebImg(String destination, Uint8List webImage) {
+    try {
+      final ref = FirebaseStorage.instance.ref(destination);
+
+      return ref.putData(webImage);
+    } on FirebaseException catch (e) {
+      return null;
+    }
+  }
+
+  uploadImg(String destination, File file) {
+    try {
+      final ref = FirebaseStorage.instance.ref(destination);
+
+      return ref.putFile(file);
+    } on FirebaseException catch (e) {
+      return null;
+    }
+  }
+
+  Future<void> _getPic(ImageSource imgSrc) async {
+    if (!kIsWeb) {
+      final ImagePicker _picker = ImagePicker();
+      XFile? image = await _picker.pickImage(source: imgSrc);
+      if (image != null) {
+        var selected = File(image.path);
+        setState(() {
+          _pickedImage = selected;
+        });
+        uploadFile();
+      } else {
+        debugPrint("No Image has been picked");
+        EasyLoading.dismiss();
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('No Image has been picked'),
+          ),
+        );
+      }
+    } else if (kIsWeb) {
+      final ImagePicker _picker = ImagePicker();
+      XFile? image = await _picker.pickImage(source: imgSrc);
+      if (image != null) {
+        var f = await image.readAsBytes();
+        setState(() {
+          webImage = f;
+          _pickedImage = File('a');
+        });
+      } else {
+        debugPrint("No Image has been picked");
+        EasyLoading.dismiss();
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('No Image has been picked'),
+          ),
+        );
+      }
+      uploadFile();
+    } else {
+      debugPrint("Wrong");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,10 +234,93 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 const Spacer(),
-                CircleAvatar(
-                  radius: 20,
-                  backgroundImage: NetworkImage(
-                    FirebaseAuth.instance.currentUser!.photoURL.toString(),
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext buildContext) {
+                          return SimpleDialog(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    EasyLoading.show(
+                                      status: '',
+                                      dismissOnTap: false,
+                                    );
+                                    _getPic(ImageSource.camera);
+                                  },
+                                  child: Row(
+                                    children: const [
+                                      Spacer(),
+                                      Icon(Icons.camera_alt_outlined),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text("Camera"),
+                                      Spacer(),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    EasyLoading.show(
+                                      status: '',
+                                      dismissOnTap: false,
+                                    );
+                                    _getPic(ImageSource.gallery);
+                                  },
+                                  child: Row(
+                                    children: const [
+                                      Spacer(),
+                                      Icon(Icons.photo_album_outlined),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text("Gallery"),
+                                      Spacer(),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        });
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(300.0),
+                    child: _pickedImage == null
+                        ? loadFirebaseStoragePic == false
+                            ? CircleAvatar(
+                                radius: 20,
+                                backgroundImage: NetworkImage(
+                                  FirebaseAuth.instance.currentUser!.photoURL
+                                      .toString(),
+                                ),
+                              )
+                            : CircleAvatar(
+                                radius: 20,
+                                backgroundImage: NetworkImage(
+                                  firebaseProfilePic!,
+                                ),
+                              )
+                        : kIsWeb
+                            ? Image.memory(
+                                webImage,
+                                height: 40,
+                                width: 40,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.file(
+                                _pickedImage!,
+                                height: 40,
+                                width: 40,
+                                fit: BoxFit.cover,
+                              ),
                   ),
                 ),
                 const SizedBox(
@@ -120,6 +328,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+            // _pickedImage == null
+            //     ? Container()
+            //     : kIsWeb
+            //         ? Image.memory(webImage, fit: BoxFit.fill)
+            //         : Image.file(
+            //             _pickedImage!,
+            //             fit: BoxFit.fill,
+            //           ),
             Row(
               children: [
                 const SizedBox(

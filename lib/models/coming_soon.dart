@@ -76,14 +76,17 @@ class ComingSoonItem {
         year: json["year"],
         releaseState: json["releaseState"],
         image: json["image"],
-        runtimeMins: json["runtimeMins"],
-        runtimeStr: json["runtimeStr"],
-        plot: json["plot"],
-        contentRating: json["contentRating"],
-        imDbRating: json["imDbRating"],
-        imDbRatingCount: json["imDbRatingCount"],
-        metacriticRating: json["metacriticRating"],
-        genres: json["genres"],
+        runtimeMins: json["runtimeMins"] == null ? " " : json["runtimeMins"],
+        runtimeStr: json["runtimeStr"] == null ? " " : json["runtimeStr"],
+        plot: json["plot"] == null ? " " : json["plot"],
+        contentRating:
+            json["contentRating"] == null ? " " : json["contentRating"],
+        imDbRating: json["imDbRating"] == null ? " " : json["imDbRating"],
+        imDbRatingCount:
+            json["imDbRatingCount"] == null ? " " : json["imDbRatingCount"],
+        metacriticRating:
+            json["metacriticRating"] == null ? " " : json["metacriticRating"],
+        genres: json["genres"] == null ? " " : json["genres"],
         genreList: List<GenreList>.from(
             json["genreList"].map((x) => GenreList.fromJson(x))),
         directors: json["directors"],

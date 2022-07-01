@@ -1,3 +1,3 @@
-String apiKey = 'k_1f585uqg';
+String apiKey = 'k_de34c88r';
 
 enum Searching { stopped, loading, completed, failed }

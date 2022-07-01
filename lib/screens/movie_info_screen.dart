@@ -1,5 +1,7 @@
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:m0vieapp/models/movie.dart';
+import 'package:m0vieapp/utils/firestore_database.dart';
 import 'package:m0vieapp/utils/remote_service.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -17,11 +19,18 @@ class MovieInfoScreen extends StatefulWidget {
 class _MovieInfoScreenState extends State<MovieInfoScreen> {
   Movie? movie;
   bool loading = true;
+  bool? favourite;
 
   @override
   void initState() {
     super.initState();
+    getFavourite();
     getMovieInfo();
+    debugPrint('favourite: $favourite');
+  }
+
+  getFavourite() async {
+    favourite = await FirestoreDatabase().checkFavourite(widget.id, "movie");
   }
 
   getMovieInfo() async {
@@ -50,6 +59,18 @@ class _MovieInfoScreenState extends State<MovieInfoScreen> {
                   color: Colors.black,
                 ),
               ),
+        actions: [
+          FavoriteButton(
+            isFavorite: favourite,
+            iconSize: MediaQuery.textScaleFactorOf(context) * 35,
+            valueChanged: (value) {
+              value
+                  ? FirestoreDatabase().addToFavourite(movie!.id, "movie")
+                  : FirestoreDatabase().removeFromFavourite(movie!.id, "movie");
+            },
+          ),
+          const SizedBox(width: 16),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
