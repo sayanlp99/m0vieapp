@@ -18,15 +18,16 @@ class RemoteService {
     }
   }
 
-  Future<List<ComingSoonItem>?> getComingSoon() async {
+  Future<List<Item>?> getComingSoon() async {
     var client = http.Client();
     var response = await client.get(Uri.parse(ApiUrl.getCommingSoon()));
     if (response.statusCode == 200) {
       var json = response.body;
-      return comingSoonFromJson(json).items;
-    } else {
-      return null;
+      return comingSoonItemFromJson(json).items;
     }
+    // else {
+    //   return null;
+    // }
   }
 
   Future<List<PopularTopItem>?> getPopularMovies() async {

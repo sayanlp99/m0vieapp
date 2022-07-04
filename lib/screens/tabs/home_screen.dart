@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<ComingSoonItem>? comingSoonItem;
+  List<Item>? comingSoonItem;
   List<PopularTopItem>? popularMoviesItem;
   List<PopularTopItem>? popularTvItem;
   List<PopularTopItem>? topMoviesItem;

@@ -11,7 +11,7 @@ class ComingSoonMoviesScreen extends StatefulWidget {
 }
 
 class _ComingSoonMoviesScreenState extends State<ComingSoonMoviesScreen> {
-  List<ComingSoonItem>? comingSoonItem;
+  List<Item>? comingSoonItem;
   bool comingSoonLoaded = true;
 
   @override

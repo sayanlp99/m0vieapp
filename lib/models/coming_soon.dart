@@ -1,51 +1,55 @@
 import 'dart:convert';
 
-ComingSoon comingSoonFromJson(String str) =>
-    ComingSoon.fromJson(json.decode(str));
+ComingSoonItem comingSoonItemFromJson(String str) =>
+    ComingSoonItem.fromJson(json.decode(str));
 
-String comingSoonToJson(ComingSoon data) => json.encode(data.toJson());
+String comingSoonItemToJson(ComingSoonItem data) => json.encode(data.toJson());
 
-class ComingSoon {
-  ComingSoon({
+class ComingSoonItem {
+  ComingSoonItem({
     required this.items,
     required this.errorMessage,
   });
 
-  List<ComingSoonItem> items;
+  List<Item> items;
   String errorMessage;
 
-  factory ComingSoon.fromJson(Map<String, dynamic> json) => ComingSoon(
-        items: List<ComingSoonItem>.from(
-            json["items"].map((x) => ComingSoonItem.fromJson(x))),
-        errorMessage: json["errorMessage"],
+  factory ComingSoonItem.fromJson(Map<String, dynamic> json) => ComingSoonItem(
+        items: json["items"] == null
+            ? []
+            : List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
+        errorMessage:
+            json["errorMessage"] == null ? null : json["errorMessage"],
       );
 
   Map<String, dynamic> toJson() => {
-        "items": List<dynamic>.from(items.map((x) => x.toJson())),
-        "errorMessage": errorMessage,
+        "items": items == null
+            ? null
+            : List<dynamic>.from(items.map((x) => x.toJson())),
+        "errorMessage": errorMessage == null ? null : errorMessage,
       };
 }
 
-class ComingSoonItem {
-  ComingSoonItem({
+class Item {
+  Item({
     required this.id,
     required this.title,
     required this.fullTitle,
     required this.year,
     required this.releaseState,
     required this.image,
-    required this.runtimeMins,
-    required this.runtimeStr,
-    required this.plot,
-    required this.contentRating,
-    required this.imDbRating,
-    required this.imDbRatingCount,
-    required this.metacriticRating,
-    required this.genres,
+    this.runtimeMins,
+    this.runtimeStr,
+    this.plot,
+    this.contentRating,
+    this.imDbRating,
+    this.imDbRatingCount,
+    this.metacriticRating,
+    this.genres,
     required this.genreList,
-    required this.directors,
+    this.directors,
     required this.directorList,
-    required this.stars,
+    this.stars,
     required this.starList,
   });
 
@@ -55,55 +59,56 @@ class ComingSoonItem {
   String year;
   String releaseState;
   String image;
-  String runtimeMins;
-  String runtimeStr;
-  String plot;
-  String contentRating;
-  String imDbRating;
-  String imDbRatingCount;
-  String metacriticRating;
-  String genres;
-  List<GenreList> genreList;
-  String directors;
-  List<RList> directorList;
-  String stars;
-  List<RList> starList;
+  dynamic runtimeMins;
+  dynamic runtimeStr;
+  dynamic plot;
+  dynamic contentRating;
+  dynamic imDbRating;
+  dynamic imDbRatingCount;
+  dynamic metacriticRating;
+  dynamic genres;
+  List<dynamic> genreList;
+  dynamic directors;
+  List<dynamic> directorList;
+  dynamic stars;
+  List<dynamic> starList;
 
-  factory ComingSoonItem.fromJson(Map<String, dynamic> json) => ComingSoonItem(
-        id: json["id"],
-        title: json["title"],
-        fullTitle: json["fullTitle"],
-        year: json["year"],
-        releaseState: json["releaseState"],
-        image: json["image"],
-        runtimeMins: json["runtimeMins"] == null ? " " : json["runtimeMins"],
-        runtimeStr: json["runtimeStr"] == null ? " " : json["runtimeStr"],
-        plot: json["plot"] == null ? " " : json["plot"],
-        contentRating:
-            json["contentRating"] == null ? " " : json["contentRating"],
-        imDbRating: json["imDbRating"] == null ? " " : json["imDbRating"],
-        imDbRatingCount:
-            json["imDbRatingCount"] == null ? " " : json["imDbRatingCount"],
-        metacriticRating:
-            json["metacriticRating"] == null ? " " : json["metacriticRating"],
-        genres: json["genres"] == null ? " " : json["genres"],
-        genreList: List<GenreList>.from(
-            json["genreList"].map((x) => GenreList.fromJson(x))),
+  factory Item.fromJson(Map<String, dynamic> json) => Item(
+        id: json["id"] == null ? null : json["id"],
+        title: json["title"] == null ? null : json["title"],
+        fullTitle: json["fullTitle"] == null ? null : json["fullTitle"],
+        year: json["year"] == null ? null : json["year"],
+        releaseState:
+            json["releaseState"] == null ? null : json["releaseState"],
+        image: json["image"] == null ? null : json["image"],
+        runtimeMins: json["runtimeMins"],
+        runtimeStr: json["runtimeStr"],
+        plot: json["plot"],
+        contentRating: json["contentRating"],
+        imDbRating: json["imDbRating"],
+        imDbRatingCount: json["imDbRatingCount"],
+        metacriticRating: json["metacriticRating"],
+        genres: json["genres"],
+        genreList: json["genreList"] == null
+            ? []
+            : List<dynamic>.from(json["genreList"].map((x) => x)),
         directors: json["directors"],
-        directorList: List<RList>.from(
-            json["directorList"].map((x) => RList.fromJson(x))),
-        stars: json["stars"],
-        starList:
-            List<RList>.from(json["starList"].map((x) => RList.fromJson(x))),
+        directorList: json["directorList"] == null
+            ? []
+            : List<dynamic>.from(json["directorList"].map((x) => x)),
+        stars: json["stars"] == null ? " " : json["stars"],
+        starList: json["starList"] == null
+            ? []
+            : List<dynamic>.from(json["starList"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "fullTitle": fullTitle,
-        "year": year,
-        "releaseState": releaseState,
-        "image": image,
+        "id": id == null ? null : id,
+        "title": title == null ? null : title,
+        "fullTitle": fullTitle == null ? null : fullTitle,
+        "year": year == null ? null : year,
+        "releaseState": releaseState == null ? null : releaseState,
+        "image": image == null ? null : image,
         "runtimeMins": runtimeMins,
         "runtimeStr": runtimeStr,
         "plot": plot,
@@ -112,50 +117,16 @@ class ComingSoonItem {
         "imDbRatingCount": imDbRatingCount,
         "metacriticRating": metacriticRating,
         "genres": genres,
-        "genreList": List<dynamic>.from(genreList.map((x) => x.toJson())),
+        "genreList": genreList == null
+            ? null
+            : List<dynamic>.from(genreList.map((x) => x)),
         "directors": directors,
-        "directorList": List<dynamic>.from(directorList.map((x) => x.toJson())),
+        "directorList": directorList == null
+            ? null
+            : List<dynamic>.from(directorList.map((x) => x)),
         "stars": stars,
-        "starList": List<dynamic>.from(starList.map((x) => x.toJson())),
-      };
-}
-
-class RList {
-  RList({
-    required this.id,
-    required this.name,
-  });
-
-  String id;
-  String name;
-
-  factory RList.fromJson(Map<String, dynamic> json) => RList(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
-}
-
-class GenreList {
-  GenreList({
-    required this.key,
-    required this.value,
-  });
-
-  String key;
-  String value;
-
-  factory GenreList.fromJson(Map<String, dynamic> json) => GenreList(
-        key: json["key"],
-        value: json["value"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "key": key,
-        "value": value,
+        "starList": starList == null
+            ? null
+            : List<dynamic>.from(starList.map((x) => x)),
       };
 }
